@@ -1,6 +1,5 @@
 import { useState, FormEvent } from 'react';
 import { supabase } from '../lib/supabaseClient';
-import Link from 'next/link';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState<string>('');
@@ -22,29 +21,48 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div>
-      <h1>ログイン</h1>
-      <form onSubmit={handleLogin}>
-        <input
-          type="email"
-          placeholder="メールアドレス"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="パスワード"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button type="submit">ログイン</button>
-      </form>
-      <p>
-        サインアップは
-        <Link href="/signup">
-          <a>こちら</a>
-        </Link>
-      </p>
+    <div
+      className="flex items-center justify-center min-h-screen bg-cover bg-center"
+      style={{
+        backgroundImage: "url('/senior-background2.jpg')",
+      }}
+    >
+      <div className="w-full max-w-md bg-white bg-opacity-90 p-8 rounded-lg shadow-lg">
+        <h1 className="text-4xl font-extrabold text-center text-gray-800 mb-8">
+          シニア新聞
+        </h1>
+        <form onSubmit={handleLogin} className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-600">メールアドレス</label>
+            <input
+              type="email"
+              placeholder="example@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full p-2 border border-gray-300 rounded mt-1 focus:ring focus:ring-blue-200"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-600">パスワード</label>
+            <input
+              type="password"
+              placeholder="********"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full p-2 border border-gray-300 rounded mt-1 focus:ring focus:ring-blue-200"
+            />
+          </div>
+          <button
+            type="submit"
+            className="w-full py-2 px-4 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+          >
+            ログイン
+          </button>
+        </form>
+        <p className="mt-4 text-sm text-gray-600 text-center">
+          サインアップはこちら
+        </p>
+      </div>
     </div>
   );
 };
