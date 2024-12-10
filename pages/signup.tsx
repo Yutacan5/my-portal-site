@@ -24,9 +24,14 @@ const Signup: React.FC = () => {
 
       alert('サインアップ成功! メールを確認してください');
       router.push('/login'); // ログイン画面にリダイレクト
-    } catch (error: any) {
-      alert(error.message);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        alert(error.message);
+      } else {
+        alert('予期せぬエラーが発生しました');
+      }
     }
+    
   };
 
   return (

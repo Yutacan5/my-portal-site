@@ -25,16 +25,21 @@ const Login: React.FC = () => {
 
       alert('ログイン成功!');
       router.push('/main'); // メイン画面にリダイレクト
-    } catch (error: any) {
-      alert(error.message);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        alert(error.message);
+      } else {
+        alert('予期せぬエラーが発生しました');
+      }
     }
+    
   };
 
   return (
     <div
       className="flex items-center justify-center min-h-screen bg-cover bg-center"
       style={{
-        backgroundImage: "url('/images/senior-background2.jpg')", // 背景画像を復旧
+        backgroundImage: "url('/senior-background2.jpg')", // 背景画像を復旧
       }}
     >
       <div className="w-full max-w-md bg-white bg-opacity-90 p-8 rounded-lg shadow-lg">
