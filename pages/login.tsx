@@ -1,22 +1,32 @@
 import { useState, FormEvent } from 'react';
 import { supabase } from '../lib/supabaseClient';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const router = useRouter();
 
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault();
 
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+    try {
+      // Supabase Authentication でログイン
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
 
-    if (error) {
-      alert('ログインに失敗しました: ' + error.message);
-    } else {
+      if (error) {
+        console.error('Login Error:', error.message);
+        throw new Error('ログインに失敗しました: ' + error.message);
+      }
+
       alert('ログイン成功!');
+      router.push('/main'); // メイン画面にリダイレクト
+    } catch (error: any) {
+      alert(error.message);
     }
   };
 
@@ -24,7 +34,7 @@ const Login: React.FC = () => {
     <div
       className="flex items-center justify-center min-h-screen bg-cover bg-center"
       style={{
-        backgroundImage: "url('/senior-background2.jpg')",
+        backgroundImage: "url('/images/senior-background2.jpg')", // 背景画像を復旧
       }}
     >
       <div className="w-full max-w-md bg-white bg-opacity-90 p-8 rounded-lg shadow-lg">
@@ -40,6 +50,7 @@ const Login: React.FC = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full p-2 border border-gray-300 rounded mt-1 focus:ring focus:ring-blue-200"
+              required
             />
           </div>
           <div>
@@ -50,6 +61,7 @@ const Login: React.FC = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="w-full p-2 border border-gray-300 rounded mt-1 focus:ring focus:ring-blue-200"
+              required
             />
           </div>
           <button
@@ -60,7 +72,10 @@ const Login: React.FC = () => {
           </button>
         </form>
         <p className="mt-4 text-sm text-gray-600 text-center">
-          サインアップはこちら
+          サインアップは{' '}
+          <Link href="/signup" className="text-blue-600 hover:underline">
+            こちら
+          </Link>
         </p>
       </div>
     </div>
