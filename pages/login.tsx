@@ -1,5 +1,6 @@
 import { useState, FormEvent } from 'react';
 import { supabase } from '../lib/supabaseClient';
+import Link from 'next/link';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState<string>('');
@@ -38,6 +39,12 @@ const Login: React.FC = () => {
         />
         <button type="submit">ログイン</button>
       </form>
+      <p>
+        サインアップは
+        <Link href="/signup">
+          <a>こちら</a>
+        </Link>
+      </p>
     </div>
   );
 };
