@@ -1,13 +1,18 @@
-import { useState } from 'react';
+import { useState, FormEvent } from 'react';
 import { supabase } from '../lib/supabaseClient';
 
-export default function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+const Login: React.FC = () => {
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
 
-  const handleLogin = async (e) => {
+  const handleLogin = async (e: FormEvent) => {
     e.preventDefault();
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
+
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
     if (error) {
       alert('ログインに失敗しました: ' + error.message);
     } else {
@@ -35,4 +40,6 @@ export default function Login() {
       </form>
     </div>
   );
-}
+};
+
+export default Login;
