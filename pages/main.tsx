@@ -19,8 +19,26 @@ const Main: React.FC = () => {
           <div className="p-4 bg-gray-50 rounded shadow-sm">
             <h2 className="text-xl font-semibold text-gray-700 mb-4">お知らせ</h2>
             <ul className="list-disc pl-5 text-gray-600">
-              <li>年末年始の休暇について</li>
-              <li>セキュリティ研修のご案内</li>
+              <li>
+                <a
+                  href="https://preview.studio.site/live/4BqNby7Vqr"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 underline hover:text-blue-800"
+                >
+                  当社のHPをリニューアルしました
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.mhlw.go.jp/stf/newpage_32105.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 underline hover:text-blue-800"
+                >
+                  労働条件明示のルールが変更されました
+                </a>
+              </li>
               <li>新しい勤怠システムのお知らせ</li>
             </ul>
           </div>
